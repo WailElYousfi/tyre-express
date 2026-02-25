@@ -1,0 +1,179 @@
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-content fade-in" #fadeEl>
+      <div class="badge">
+        <span class="pulse-dot"><span class="ring"></span><span class="dot"></span></span>
+        {{ t.home_badge }}
+      </div>
+      <h1>
+        {{ t.home_h1_1 }}<br/>
+        <span class="text-primary">{{ t.home_h1_accent }}</span><br/>
+        {{ t.home_h1_2 }}
+      </h1>
+      <p>{{ t.home_h1_sub }}</p>
+      <div class="hero-cta">
+        <a routerLink="/book" class="btn-hero-primary">{{ t.home_book_btn }}</a>
+        <div class="social-proof">
+          <div class="avatars">
+            <div class="av">JD</div>
+            <div class="av">ML</div>
+            <div class="av">AK</div>
+          </div>
+          <span><b class="text-primary">4.9/5</b> {{ t.home_social_proof }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image fade-in" #fadeEl>
+      <div class="image-card">
+        <img src="assets/images/image_hero_section.png" alt="Tyre" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Value Props -->
+<section class="value-props">
+  <div class="container value-grid">
+    <div class="value-item">
+      <span class="material-symbols-outlined">schedule</span>
+      <div><h3>{{ t.vp_time_title }}</h3><p>{{ t.vp_time_desc }}</p></div>
+    </div>
+    <div class="value-item">
+      <span class="material-symbols-outlined">local_shipping</span>
+      <div><h3>{{ t.vp_mobile_title }}</h3><p>{{ t.vp_mobile_desc }}</p></div>
+    </div>
+    <div class="value-item">
+      <span class="material-symbols-outlined">verified_user</span>
+      <div><h3>{{ t.vp_quality_title }}</h3><p>{{ t.vp_quality_desc }}</p></div>
+    </div>
+    <div class="value-item">
+      <span class="material-symbols-outlined">eco</span>
+      <div><h3>{{ t.vp_eco_title }}</h3><p>{{ t.vp_eco_desc }}</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services-section">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-title">{{ t.services_title }}</h2>
+      <p class="section-subtitle" style="margin: 0 auto 3rem;">{{ t.services_sub }}</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card card" *ngFor="let s of services">
+        <div class="service-img">
+          <img [src]="s.img" [alt]="s.title" loading="lazy"/>
+          <div class="img-overlay"><span>{{ s.title }}</span></div>
+        </div>
+        <div class="service-body">
+          <p>{{ s.desc }}</p>
+          <a routerLink="/services" class="learn-more">
+            Learn More <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="services-cta">
+      <a routerLink="/services" class="btn-outline">{{ t.services_view_all }}</a>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-section">
+  <div class="container">
+    <h2 class="section-title text-center">{{ t.how_title }}</h2>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-icon"><span class="material-symbols-outlined">calendar_month</span></div>
+        <div class="step-num">01</div>
+        <h3>{{ t.how_1_title }}</h3>
+        <p>{{ t.how_1_desc }}</p>
+      </div>
+      <div class="step">
+        <div class="step-icon"><span class="material-symbols-outlined">pin_drop</span></div>
+        <div class="step-num">02</div>
+        <h3>{{ t.how_2_title }}</h3>
+        <p>{{ t.how_2_desc }}</p>
+      </div>
+      <div class="step">
+        <div class="step-icon"><span class="material-symbols-outlined">speed</span></div>
+        <div class="step-num">03</div>
+        <h3>{{ t.how_3_title }}</h3>
+        <p>{{ t.how_3_desc }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section">
+  <div class="container">
+    <h2 class="section-title text-center">{{ t.testimonials_title }}</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card card" *ngFor="let t_ of testimonials">
+        <div class="stars">
+          <span class="material-symbols-outlined">star</span>
+          <span class="material-symbols-outlined">star</span>
+          <span class="material-symbols-outlined">star</span>
+          <span class="material-symbols-outlined">star</span>
+          <span class="material-symbols-outlined">star</span>
+        </div>
+        <p>"{{ t_.text }}"</p>
+        <span class="author">— {{ t_.author }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Opening Hours -->
+<section class="hours-section">
+  <div class="container">
+    <div class="hours-layout">
+      <div class="hours-text">
+        <div class="badge">
+          <span class="material-symbols-outlined" style="font-size:0.9rem">schedule</span>
+          {{ t.oh_title }}
+        </div>
+        <h2 class="section-title">{{ t.oh_title }}</h2>
+        <p class="section-subtitle">{{ t.oh_sub }}</p>
+        <div class="open-status">
+          <div class="pulse-dot" *ngIf="isOpen()">
+            <span class="ring"></span><span class="dot"></span>
+          </div>
+          <span [class.text-primary]="isOpen()" [class.status-closed]="!isOpen()">
+            {{ isOpen() ? t.oh_open : t.oh_closed }}
+          </span>
+        </div>
+      </div>
+      <div class="hours-table card">
+        <div class="hour-row" *ngFor="let h of openingHours" [class.today]="h.isToday">
+          <span class="day-label">
+            <span *ngIf="h.isToday" class="today-badge">{{ t.oh_today }}</span>
+            {{ h.day }}
+          </span>
+          <span class="time-slots" *ngIf="h.slots.length > 0">
+            <span *ngFor="let slot of h.slots; let last = last">
+              {{ slot }}<span *ngIf="!last" class="sep"> &nbsp;/&nbsp; </span>
+            </span>
+          </span>
+          <span class="closed-label" *ngIf="h.slots.length === 0">{{ t.oh_closed }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-banner">
+  <div class="container cta-inner">
+    <h2>{{ t.cta_title }}</h2>
+    <p>{{ t.cta_sub }}</p>
+    <div class="cta-btns">
+      <a routerLink="/book" class="btn-hero-primary">{{ t.cta_book }}</a>
+      <a routerLink="/contact" class="btn-outline">{{ t.cta_support }}</a>
+    </div>
+  </div>
+</section>

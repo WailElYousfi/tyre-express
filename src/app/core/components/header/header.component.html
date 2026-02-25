@@ -1,0 +1,78 @@
+<header [class.scrolled]="isScrolled()">
+  <div class="container header-inner">
+
+    <a class="logo" routerLink="/" (click)="closeMobileMenu()">
+      <span class="material-symbols-outlined logo-icon">tire_repair</span>
+      <span class="logo-text">Tyre-Express</span>
+    </a>
+
+    <nav class="desktop-nav">
+      <a *ngFor="let link of navLinks()"
+        [routerLink]="link.path"
+        routerLinkActive="active"
+        class="nav-link">
+        {{ link.label }}
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle" (click)="toggleTheme()"
+        [title]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
+        <span class="material-symbols-outlined">{{ isDark() ? 'light_mode' : 'dark_mode' }}</span>
+      </button>
+
+      <div class="lang-switcher">
+        <button class="lang-btn" (click)="toggleLangDropdown()">
+          <span class="lang-label">{{ currentLang() }}</span>
+          <span class="material-symbols-outlined lang-chevron" [class.rotated]="langDropdownOpen()">expand_more</span>
+        </button>
+        <div class="lang-dropdown" *ngIf="langDropdownOpen()">
+          <button (click)="setLang('en')" [class.active]="lang() === 'en'">English</button>
+          <button (click)="setLang('nl')" [class.active]="lang() === 'nl'">Nederlands</button>
+        </div>
+      </div>
+
+      <a href="tel:+3200000000" class="btn-call">
+        <span class="material-symbols-outlined">call</span>
+        {{ t().nav_call }}
+      </a>
+
+      <a routerLink="/book" class="btn-primary">{{ t().header_book }}</a>
+    </div>
+
+    <button class="hamburger" (click)="toggleMobileMenu()" [class.open]="mobileMenuOpen()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" [class.open]="mobileMenuOpen()">
+    <nav>
+      <a *ngFor="let link of navLinks()"
+        [routerLink]="link.path"
+        routerLinkActive="active"
+        class="mobile-nav-link"
+        (click)="closeMobileMenu()">
+        {{ link.label }}
+      </a>
+    </nav>
+
+    <div class="mobile-lang">
+      <button (click)="setLang('en')" [class.active]="lang() === 'en'">English</button>
+      <button (click)="setLang('nl')" [class.active]="lang() === 'nl'">Nederlands</button>
+    </div>
+
+    <div class="mobile-actions">
+      <button class="theme-toggle-mobile" (click)="toggleTheme()">
+        <span class="material-symbols-outlined">{{ isDark() ? 'light_mode' : 'dark_mode' }}</span>
+        {{ isDark() ? 'Light Mode' : 'Dark Mode' }}
+      </button>
+      <a href="tel:+3200000000" class="btn-outline" (click)="closeMobileMenu()">
+        <span class="material-symbols-outlined">call</span>
+        {{ t().nav_call }}
+      </a>
+      <a routerLink="/book" class="btn-primary" (click)="closeMobileMenu()">{{ t().header_book }}</a>
+    </div>
+  </div>
+</header>

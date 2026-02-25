@@ -1,0 +1,398 @@
+<!-- Progress Stepper -->
+<div class="stepper-wrapper">
+  <div class="stepper container">
+    <ng-container *ngFor="let step of steps(); let i = index">
+      <!-- Connector -->
+      <div class="step-connector" *ngIf="i > 0" [class.done]="currentStep() > i"></div>
+      <!-- Step bubble -->
+      <div
+        class="step-bubble"
+        [class.active]="currentStep() === step.n"
+        [class.done]="currentStep() > step.n"
+        (click)="goToStep(step.n)"
+      >
+        <div class="bubble-circle">
+          <span class="material-symbols-outlined" *ngIf="currentStep() > step.n">check</span>
+          <span *ngIf="currentStep() <= step.n">{{ step.n }}</span>
+        </div>
+        <span class="bubble-label">{{ step.label }}</span>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="booking-layout container" *ngIf="!confirmed()">
+  <!-- ─── FORM AREA ─────────────────────────────────────────────────────── -->
+  <div class="form-area">
+
+    <!-- ── STEP 1: VEHICLE ── -->
+    <div class="step-panel" *ngIf="currentStep() === 1">
+      <div class="panel-header">
+        <h1>{{ t.bk_vehicle_title }}</h1>
+        <p>{{ t.bk_vehicle_sub }}</p>
+      </div>
+
+      <!-- Tab toggle -->
+      <div class="tab-toggle">
+        <button [class.active]="vehicleTab() === 'plate'" (click)="vehicleTab.set('plate')">
+          {{ t.bk_tab_plate }}
+        </button>
+        <button [class.active]="vehicleTab() === 'manual'" (click)="vehicleTab.set('manual')">
+          {{ t.bk_tab_manual }}
+        </button>
+      </div>
+
+      <!-- Plate Input -->
+      <div *ngIf="vehicleTab() === 'plate'" class="plate-section">
+        <div *ngIf="!vehicleFound()">
+          <label class="field-label">{{ t.bk_plate_label }}</label>
+          <div class="plate-input-row">
+            <div class="plate-input-wrap">
+              <div class="eu-flag">
+                <span class="eu-stars">★</span>
+                <span>EU</span>
+              </div>
+              <input
+                class="plate-input"
+                type="text"
+                [placeholder]="t.bk_plate_placeholder"
+                [value]="plateInput()"
+                (input)="plateInput.set($any($event.target).value)"
+                (keyup.enter)="findVehicle()"
+              />
+            </div>
+            <button class="find-btn" (click)="findVehicle()">
+              {{ t.bk_find_btn }}
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+          </div>
+          <p class="field-hint">
+            <span class="material-symbols-outlined">info</span>
+            {{ t.bk_plate_hint }}
+          </p>
+        </div>
+
+        <!-- Found Vehicle -->
+        <div *ngIf="vehicleFound() && vehicleInfo()" class="vehicle-found-card">
+          <div class="vehicle-icon">
+            <span class="material-symbols-outlined">directions_car</span>
+          </div>
+          <div class="vehicle-details">
+            <div class="vehicle-plate-badge">{{ vehicleInfo()!.plate }}</div>
+            <h3>{{ vehicleInfo()!.year }} {{ vehicleInfo()!.make }} {{ vehicleInfo()!.model }}</h3>
+            <p>{{ vehicleInfo()!.trim }}</p>
+          </div>
+          <button class="clear-btn" (click)="clearVehicle()">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Manual Entry -->
+      <div *ngIf="vehicleTab() === 'manual'" class="manual-grid">
+        <div class="form-group">
+          <label class="field-label">{{ t.bk_make }}</label>
+          <select [(ngModel)]="manualForm.make">
+            <option value="">{{ t.bk_select_make }}</option>
+            <option>Volkswagen</option><option>BMW</option><option>Audi</option>
+            <option>Mercedes</option><option>Toyota</option><option>Ford</option>
+            <option>Renault</option><option>Peugeot</option><option>Citroën</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="field-label">{{ t.bk_model }}</label>
+          <select [(ngModel)]="manualForm.model">
+            <option value="">{{ t.bk_select_model }}</option>
+            <option>Golf</option><option>Polo</option><option>Passat</option>
+            <option>Tiguan</option><option>3 Series</option><option>5 Series</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="field-label">{{ t.bk_year }}</label>
+          <select [(ngModel)]="manualForm.year">
+            <option value="">{{ t.bk_select_year }}</option>
+            <option *ngFor="let y of [2024,2023,2022,2021,2020,2019,2018,2017,2016,2015]">{{ y }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="field-label">{{ t.bk_trim }}</label>
+          <select [(ngModel)]="manualForm.trim">
+            <option value="">{{ t.bk_select_trim }}</option>
+            <option>1.0 TSI</option><option>1.6 TDI</option><option>2.0 TDI</option><option>2.0 TSI</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: SERVICES ── -->
+    <div class="step-panel" *ngIf="currentStep() === 2">
+      <div class="panel-header">
+        <h1>{{ t.bk_service_title }}</h1>
+        <p>{{ t.bk_service_sub }}</p>
+      </div>
+      <div class="services-grid">
+        <div
+          class="service-option"
+          *ngFor="let s of availableServices"
+          [class.selected]="isServiceSelected(s.id)"
+          (click)="toggleService(s.id)"
+        >
+          <div class="service-check">
+            <span class="material-symbols-outlined" *ngIf="isServiceSelected(s.id)">check_circle</span>
+            <span class="material-symbols-outlined uncheck" *ngIf="!isServiceSelected(s.id)">radio_button_unchecked</span>
+          </div>
+          <div class="service-icon-wrap">
+            <span class="material-symbols-outlined">{{ s.icon }}</span>
+          </div>
+          <div class="service-info">
+            <h4>{{ s.title }}</h4>
+            <p>{{ s.desc }}</p>
+          </div>
+          <div class="service-price">€{{ s.price }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: SCHEDULE ── -->
+    <div class="step-panel" *ngIf="currentStep() === 3">
+      <div class="panel-header">
+        <h1>{{ t.bk_schedule_title }}</h1>
+        <p>{{ t.bk_schedule_sub }}</p>
+      </div>
+
+      <!-- Date picker -->
+      <div class="schedule-section">
+        <label class="field-label" style="margin-bottom: 0.75rem; display: block;">Date</label>
+        <div class="date-grid">
+          <button
+            class="date-btn"
+            *ngFor="let day of calendarDays"
+            [class.selected]="selectedDate() === day.date"
+            [disabled]="day.disabled"
+            (click)="selectedDate.set(day.date)"
+          >
+            <span class="day-name">{{ day.dayName }}</span>
+            <span class="day-num">{{ day.dayNum }}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Time picker -->
+      <div class="schedule-section" *ngIf="selectedDate()">
+        <label class="field-label" style="margin-bottom: 0.75rem; display: block;">Time</label>
+        <div class="time-grid">
+          <button
+            class="time-btn"
+            *ngFor="let slot of timeSlots"
+            [class.selected]="selectedTime() === slot.time"
+            [class.unavailable]="!slot.available"
+            [disabled]="!slot.available"
+            (click)="selectedTime.set(slot.time)"
+          >
+            {{ slot.time }}
+            <span class="unavail-label" *ngIf="!slot.available">×</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="schedule-section">
+        <div class="form-group">
+          <label class="field-label">{{ t.co_location }}</label>
+          <div class="location-input-wrap">
+            <span class="material-symbols-outlined loc-icon">location_on</span>
+            <input
+              type="text"
+              [placeholder]="t.co_location_placeholder"
+              [value]="locationInput()"
+              (input)="locationInput.set($any($event.target).value)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: CONFIRM ── -->
+    <div class="step-panel" *ngIf="currentStep() === 4">
+      <div class="panel-header">
+        <h1>{{ t.bk_confirm_title }}</h1>
+        <p>{{ t.bk_confirm_sub }}</p>
+      </div>
+
+      <!-- Summary review -->
+      <div class="confirm-grid">
+        <div class="confirm-block">
+          <h4 class="confirm-block-title">
+            <span class="material-symbols-outlined">directions_car</span>
+            {{ t.bk_vehicle_label }}
+          </h4>
+          <p *ngIf="vehicleInfo()">{{ vehicleInfo()!.year }} {{ vehicleInfo()!.make }} {{ vehicleInfo()!.model }}</p>
+          <p *ngIf="!vehicleInfo()">{{ manualForm.year }} {{ manualForm.make }} {{ manualForm.model }}</p>
+        </div>
+        <div class="confirm-block">
+          <h4 class="confirm-block-title">
+            <span class="material-symbols-outlined">build_circle</span>
+            {{ t.bk_services_label }}
+          </h4>
+          <p *ngFor="let s of selectedServiceItems">{{ s.title }} — €{{ s.price }}</p>
+        </div>
+        <div class="confirm-block">
+          <h4 class="confirm-block-title">
+            <span class="material-symbols-outlined">calendar_month</span>
+            {{ t.bk_step3 }}
+          </h4>
+          <p>{{ selectedDate() }} &#64; {{ selectedTime() }}</p>
+          <p>{{ locationInput() }}</p>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div class="contact-confirm">
+        <h3>{{ t.co_name }} & {{ t.co_phone }}</h3>
+        <div class="contact-row">
+          <div class="form-group">
+            <label class="field-label">{{ t.co_name }}</label>
+            <input type="text" [value]="contactName()" (input)="contactName.set($any($event.target).value)" placeholder="Jan De Smet"/>
+          </div>
+          <div class="form-group">
+            <label class="field-label">{{ t.co_phone }}</label>
+            <input type="tel" [value]="contactPhone()" (input)="contactPhone.set($any($event.target).value)" placeholder="+32 499 00 00 00"/>
+          </div>
+          <div class="form-group">
+            <label class="field-label">{{ t.co_email }}</label>
+            <input type="email" [value]="contactEmail()" (input)="contactEmail.set($any($event.target).value)" placeholder="jan@example.be"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="step-nav">
+      <button class="back-btn" (click)="goBack()" *ngIf="currentStep() > 1">
+        <span class="material-symbols-outlined">chevron_left</span> {{ t.bk_back }}
+      </button>
+      <div class="spacer" *ngIf="currentStep() === 1"></div>
+      <button
+        class="continue-btn"
+        (click)="currentStep() === 4 ? confirmBooking() : goNext()"
+        [disabled]="!canContinue"
+      >
+        {{ currentStep() === 4 ? t.bk_confirm_btn : t.bk_continue }}
+        <span class="material-symbols-outlined" *ngIf="currentStep() < 4">arrow_forward</span>
+        <span class="material-symbols-outlined" *ngIf="currentStep() === 4">check</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── SUMMARY SIDEBAR ───────────────────────────────────────────────── -->
+  <aside class="summary-sidebar">
+    <div class="summary-card">
+      <div class="summary-header">
+        <span class="material-symbols-outlined">receipt_long</span>
+        {{ t.bk_summary_title }}
+      </div>
+      <div class="summary-body">
+        <!-- Vehicle -->
+        <div class="summary-vehicle">
+          <div class="sv-icon">
+            <span class="material-symbols-outlined">directions_car</span>
+          </div>
+          <div>
+            <span class="summary-label">{{ t.bk_vehicle_label }}</span>
+            <p *ngIf="vehicleInfo()">{{ vehicleInfo()!.year }} {{ vehicleInfo()!.make }} {{ vehicleInfo()!.model }}</p>
+            <p *ngIf="!vehicleInfo()" class="empty">{{ t.bk_vehicle_empty }}</p>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="summary-services">
+          <span class="summary-label">{{ t.bk_services_label }}</span>
+          <div class="service-line" *ngFor="let s of selectedServiceItems">
+            <span>{{ s.title }}</span>
+            <span>€{{ s.price }}</span>
+          </div>
+          <div class="service-line base">
+            <span>{{ t.bk_fitting_fee }}</span>
+            <span>€40.00</span>
+          </div>
+        </div>
+
+        <!-- Schedule preview -->
+        <div class="summary-schedule" *ngIf="selectedDate()">
+          <span class="summary-label">{{ t.bk_step3 }}</span>
+          <p>{{ selectedDate() }}&nbsp;&nbsp;{{ selectedTime() }}</p>
+        </div>
+
+        <!-- Pricing -->
+        <div class="summary-pricing">
+          <div class="price-row muted">
+            <span>{{ t.bk_subtotal }}</span>
+            <span>€{{ subtotal }}.00</span>
+          </div>
+          <div class="price-row muted">
+            <span>{{ t.bk_tax }}</span>
+            <span>€{{ tax }}</span>
+          </div>
+          <div class="price-row total">
+            <span>{{ t.bk_total }}</span>
+            <span class="total-amount">€{{ total }}</span>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="summary-disclaimer">
+          <span class="material-symbols-outlined">verified</span>
+          <p>{{ t.bk_disclaimer }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help -->
+    <div class="summary-help">
+      <p>{{ t.bk_need_help }}</p>
+      <a href="tel:+3200000000">
+        <span class="material-symbols-outlined">call</span>
+        +32 00 000 00 00
+      </a>
+    </div>
+  </aside>
+</div>
+
+<!-- ── CONFIRMED STATE ────────────────────────────────────────────────────── -->
+<div class="confirmed-wrapper container" *ngIf="confirmed()">
+  <div class="confirmed-card">
+    <div class="confirmed-icon">
+      <span class="material-symbols-outlined">check_circle</span>
+    </div>
+    <h2>{{ t.bk_confirmed_title }}</h2>
+    <p>{{ t.bk_confirmed_sub }}</p>
+    <div class="confirmed-details">
+      <div class="cd-item">
+        <span class="material-symbols-outlined">directions_car</span>
+        <span *ngIf="vehicleInfo()">{{ vehicleInfo()!.year }} {{ vehicleInfo()!.make }} {{ vehicleInfo()!.model }}</span>
+        <span *ngIf="!vehicleInfo()">{{ manualForm.make }} {{ manualForm.model }}</span>
+      </div>
+      <div class="cd-item">
+        <span class="material-symbols-outlined">calendar_month</span>
+        <span>{{ selectedDate() }} &#64; {{ selectedTime() }}</span>
+      </div>
+      <div class="cd-item">
+        <span class="material-symbols-outlined">location_on</span>
+        <span>{{ locationInput() }}</span>
+      </div>
+    </div>
+    <button class="new-booking-btn" (click)="resetBooking()">
+      <span class="material-symbols-outlined">add</span>
+      {{ t.bk_new_booking }}
+    </button>
+  </div>
+</div>
+
+<!-- Partners -->
+<div class="partners-section container" *ngIf="!confirmed()">
+  <h3>{{ t.bk_partners_title }}</h3>
+  <div class="partners-grid">
+    <div class="partner-logo" *ngFor="let _ of [1,2,3,4,5,6]"></div>
+  </div>
+</div>

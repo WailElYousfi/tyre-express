@@ -1,0 +1,63 @@
+<footer>
+  <div class="container footer-grid">
+    <!-- Brand -->
+    <div class="footer-brand">
+      <a class="logo" routerLink="/">
+        <span class="material-symbols-outlined">tire_repair</span>
+        <span>Tyre-Express</span>
+      </a>
+      <p>{{ t.footer_tagline }}</p>
+      <div class="socials">
+        <a href="#" aria-label="Website"><span class="material-symbols-outlined">public</span></a>
+        <a href="#" aria-label="Share"><span class="material-symbols-outlined">share</span></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h4>{{ t.footer_quick_links }}</h4>
+      <ul>
+        <li *ngFor="let link of quickLinks">
+          <a [routerLink]="link.path">{{ link.label }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <div class="footer-col">
+      <h4>{{ t.footer_support }}</h4>
+      <ul>
+        <li *ngFor="let link of supportLinks">
+          <a [routerLink]="link.path">{{ link.label }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-col">
+      <h4>{{ t.footer_contact_us }}</h4>
+      <ul class="contact-list">
+        <li>
+          <span class="material-symbols-outlined">call</span>
+          <span>+32 00 000 00 00</span>
+        </li>
+        <li>
+          <span class="material-symbols-outlined">mail</span>
+          <span>info&#64;tyre-express.be</span>
+        </li>
+        <li>
+          <span class="material-symbols-outlined">location_on</span>
+          <span>9340 Lede, East Flanders<br/>Belgium</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom container">
+    <p>© {{ currentYear }} Tyre-Express Mobile Services. {{ t.footer_rights }}</p>
+    <div class="legal-links">
+      <a href="#">{{ t.footer_privacy }}</a>
+      <a href="#">{{ t.footer_cookie }}</a>
+    </div>
+  </div>
+</footer>
