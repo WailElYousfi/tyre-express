@@ -1,0 +1,100 @@
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.service-row {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+  /* ── FIX #5: card height is driven by content; image stretches to match ── */
+  align-items: stretch;
+
+  &:hover { transform: translateY(-2px); }
+
+  &.reverse {
+    direction: rtl;
+    > * { direction: ltr; }
+  }
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+    &.reverse { direction: ltr; }
+  }
+}
+
+/* ── FIX #5: no fixed height — image fills whatever height the content needs ── */
+.sr-img {
+  /* stretch to full card height automatically via align-items: stretch on parent */
+  min-height: 200px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;        /* fills the stretched container */
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+  }
+
+  &:hover img { transform: scale(1.05); }
+}
+
+.sr-content {
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  justify-content: center;
+}
+
+.sr-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: rgba(245,200,0,0.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+
+  .material-symbols-outlined { color: var(--primary); font-size: 1.3rem; }
+}
+
+h2 { font-size: 1.15rem; font-weight: 800; }
+
+p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.65; }
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+
+    .material-symbols-outlined { color: var(--primary); font-size: 0.9rem; }
+  }
+}
+
+.book-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.2rem;
+  background: var(--primary);
+  color: #111;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-decoration: none;
+  width: fit-content;
+  margin-top: 0.25rem;
+  transition: background 0.2s, transform 0.15s;
+
+  &:hover { background: var(--primary-hover); transform: scale(1.02); }
+}

@@ -39,36 +39,16 @@ export class BookingComponent {
     { n: 4, label: this.t.bk_step4 },
   ]);
 
-  // ── Step 1: Vehicle ───────────────────────────────────────────────────────
-  vehicleTab = signal<'plate' | 'manual'>('plate');
-  plateInput = signal('');
-  vehicleFound = signal(false);
-  vehicleInfo = signal<{ make: string; model: string; year: string; trim: string; plate: string } | null>(null);
-
-  manualForm = { make: '', model: '', year: '', trim: '' };
-
-  findVehicle() {
-    const plate = this.plateInput().trim();
-    if (plate.length >= 4) {
-      // Simulate vehicle lookup
-      this.vehicleInfo.set({ make: 'Volkswagen', model: 'Golf', year: '2021', trim: '1.6 TDI Comfortline', plate: plate.toUpperCase() });
-      this.vehicleFound.set(true);
-    }
-  }
-
-  clearVehicle() {
-    this.vehicleFound.set(false);
-    this.vehicleInfo.set(null);
-    this.plateInput.set('');
-  }
+  // ── Step 1: Vehicle (manual entry only) ─────────────────────────────────
+  manualForm = { make: '', model: '', year: '', trim: '', regNumber: '' };
 
   // ── Step 2: Services ──────────────────────────────────────────────────────
   get availableServices(): Service[] {
     return [
-      { id: 'change', icon: 'tire_repair', title: this.t.nav_services === 'Services' ? 'Tire Change' : 'Bandenwisseling', desc: this.t.nav_services === 'Services' ? 'On-site replacement of all tire types.' : 'Ter plaatse vervangen van alle bandentypen.', price: 40 },
-      { id: 'balance', icon: 'settings', title: this.t.nav_services === 'Services' ? 'Wheel Balancing' : 'Wielbalancering', desc: this.t.nav_services === 'Services' ? 'Computer balancing for a vibration-free ride.' : 'Computerbalancering voor een trillingsvrije rit.', price: 20 },
-      { id: 'rim', icon: 'build', title: this.t.nav_services === 'Services' ? 'Rim Repair' : 'Velgreparatie', desc: this.t.nav_services === 'Services' ? 'Fix scratches and dents on alloy wheels.' : 'Herstel krassen en deuken op velgen.', price: 60 },
-      { id: 'swap', icon: 'ac_unit', title: this.t.nav_services === 'Services' ? 'Seasonal Swap' : 'Seizoenswisseling', desc: this.t.nav_services === 'Services' ? 'Winter/summer changeover with storage.' : 'Winter/zomer wisseling met opslag.', price: 55 },
+      { id: 'change', icon: 'tire_repair', title: this.t.bk_svc_change_title,  desc: this.t.bk_svc_change_desc,  price: 40 },
+      { id: 'balance', icon: 'settings',   title: this.t.bk_svc_balance_title, desc: this.t.bk_svc_balance_desc, price: 20 },
+      { id: 'rim',    icon: 'build',        title: this.t.bk_svc_rim_title,     desc: this.t.bk_svc_rim_desc,     price: 60 },
+      { id: 'swap',   icon: 'ac_unit',      title: this.t.bk_svc_swap_title,    desc: this.t.bk_svc_swap_desc,    price: 55 },
     ];
   }
 
@@ -92,23 +72,75 @@ export class BookingComponent {
   selectedDate = signal<string>('');
   selectedTime = signal<string>('');
 
-  get calendarDays() {
-    const today = new Date();
-    const days = [];
-    for (let i = 1; i <= 14; i++) {
-      const d = new Date(today);
-      d.setDate(today.getDate() + i);
-      const dayNames = this.ts.lang === 'en'
-        ? ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
-        : ['Zo','Ma','Di','Wo','Do','Vr','Za'];
-      days.push({
-        date: d.toISOString().split('T')[0],
-        dayName: dayNames[d.getDay()],
-        dayNum: d.getDate(),
-        disabled: d.getDay() === 0 // no Sundays
+  // ── Real calendar navigation ──────────────────────────────────────────────
+  private _today = new Date();
+  calendarYear = signal(this._today.getFullYear());
+  calendarMonth = signal(this._today.getMonth()); // 0-based
+
+  get calendarMonthLabel() {
+    const en = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const nl = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
+    const names = this.ts.lang === 'en' ? en : nl;
+    return names[this.calendarMonth()] + ' ' + this.calendarYear();
+  }
+
+  get calendarGrid() {
+    const year = this.calendarYear();
+    const month = this.calendarMonth();
+    const today = this._today;
+    const dayNamesEn = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const dayNamesNl = ['Zo','Ma','Di','Wo','Do','Vr','Za'];
+    const dayNames = this.ts.lang === 'en' ? dayNamesEn : dayNamesNl;
+
+    // First day of month (0=Sun) and days in month
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const cells: { date: string; dayName: string; dayNum: number; disabled: boolean; past: boolean; empty: boolean }[] = [];
+
+    // Leading empty cells (so Mon = index 0 in display: shift Sun to end)
+    const startOffset = (firstDay === 0 ? 6 : firstDay - 1); // Mon-based
+    for (let i = 0; i < startOffset; i++) {
+      cells.push({ date: '', dayName: '', dayNum: 0, disabled: true, past: true, empty: true });
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(year, month, d);
+      const isSunday = date.getDay() === 0;
+      const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+      cells.push({
+        date: date.toISOString().split('T')[0],
+        dayName: dayNames[date.getDay()],
+        dayNum: d,
+        disabled: isSunday || isPast,
+        past: isPast,
+        empty: false
       });
     }
-    return days;
+    return cells;
+  }
+
+  get canGoPrevMonth() {
+    const t = this._today;
+    return this.calendarYear() > t.getFullYear() ||
+      (this.calendarYear() === t.getFullYear() && this.calendarMonth() > t.getMonth());
+  }
+
+  prevMonth() {
+    if (!this.canGoPrevMonth) return;
+    if (this.calendarMonth() === 0) { this.calendarMonth.set(11); this.calendarYear.update(y => y - 1); }
+    else { this.calendarMonth.update(m => m - 1); }
+  }
+
+  nextMonth() {
+    if (this.calendarMonth() === 11) { this.calendarMonth.set(0); this.calendarYear.update(y => y + 1); }
+    else { this.calendarMonth.update(m => m + 1); }
+  }
+
+  get weekDayHeaders() {
+    return this.ts.lang === 'en'
+      ? ['Mo','Tu','We','Th','Fr','Sa','Su']
+      : ['Ma','Di','Wo','Do','Vr','Za','Zo'];
   }
 
   timeSlots: TimeSlot[] = [
@@ -170,10 +202,7 @@ export class BookingComponent {
   resetBooking() {
     this.currentStep.set(1);
     this.confirmed.set(false);
-    this.vehicleFound.set(false);
-    this.vehicleInfo.set(null);
-    this.plateInput.set('');
-    this.selectedServices.set(new Set());
+this.selectedServices.set(new Set());
     this.selectedDate.set('');
     this.selectedTime.set('');
     this.locationInput.set('');
@@ -184,7 +213,7 @@ export class BookingComponent {
 
   get canContinue(): boolean {
     switch (this.currentStep()) {
-      case 1: return this.vehicleFound() || (this.manualForm.make !== '' && this.manualForm.model !== '');
+      case 1: return this.manualForm.make !== '' && this.manualForm.model !== '';
       case 2: return this.selectedServices().size > 0;
       case 3: return this.selectedDate() !== '' && this.selectedTime() !== '' && this.locationInput().trim() !== '';
       case 4: return this.contactName().trim() !== '' && this.contactPhone().trim() !== '';

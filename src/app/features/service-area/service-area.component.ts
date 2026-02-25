@@ -84,8 +84,8 @@ import { TranslationService } from '../../core/services/translation.service';
     .cities-grid { display: flex; flex-direction: column; gap: 0.5rem; }
     .city-item {
       display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1rem;
-      border-radius: var(--radius-lg); border: 1px solid var(--border-dark);
-      background: var(--surface-dark); transition: border-color 0.2s;
+      border-radius: var(--radius-lg); border: 1px solid var(--border);
+      background: var(--surface); transition: border-color 0.2s;
       &:hover { border-color: rgba(245,200,0,0.4); }
       .material-symbols-outlined { color: var(--primary); font-size: 1.1rem; flex-shrink: 0; }
     }
@@ -107,7 +107,7 @@ import { TranslationService } from '../../core/services/translation.service';
     }
     .map-card {
       border-radius: var(--radius-xl); overflow: hidden; position: relative;
-      border: 1px solid var(--border-dark); box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.4);
       img { width: 100%; height: 320px; object-fit: cover; filter: grayscale(30%) brightness(0.8); }
     }
     .map-pin {

@@ -23,24 +23,16 @@ footer {
 /* Brand */
 .footer-brand {
   .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: inline-block;
     text-decoration: none;
-    margin-bottom: 1.25rem;
+    margin-bottom: -2rem;
+    margin-top: -3.5rem;
+  }
 
-    .material-symbols-outlined {
-      color: var(--primary);
-      font-size: 1.5rem;
-    }
-
-    span:last-child {
-      font-size: 1rem;
-      font-weight: 900;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--text);
-    }
+  .footer-logo-img {
+    height: 160px;
+    width: auto;
+    display: block;
   }
 
   p {

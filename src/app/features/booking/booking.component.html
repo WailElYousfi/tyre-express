@@ -33,64 +33,27 @@
         <p>{{ t.bk_vehicle_sub }}</p>
       </div>
 
-      <!-- Tab toggle -->
-      <div class="tab-toggle">
-        <button [class.active]="vehicleTab() === 'plate'" (click)="vehicleTab.set('plate')">
-          {{ t.bk_tab_plate }}
-        </button>
-        <button [class.active]="vehicleTab() === 'manual'" (click)="vehicleTab.set('manual')">
-          {{ t.bk_tab_manual }}
-        </button>
-      </div>
-
-      <!-- Plate Input -->
-      <div *ngIf="vehicleTab() === 'plate'" class="plate-section">
-        <div *ngIf="!vehicleFound()">
-          <label class="field-label">{{ t.bk_plate_label }}</label>
-          <div class="plate-input-row">
-            <div class="plate-input-wrap">
-              <div class="eu-flag">
-                <span class="eu-stars">★</span>
-                <span>EU</span>
-              </div>
-              <input
-                class="plate-input"
-                type="text"
-                [placeholder]="t.bk_plate_placeholder"
-                [value]="plateInput()"
-                (input)="plateInput.set($any($event.target).value)"
-                (keyup.enter)="findVehicle()"
-              />
+      <!-- Manual Entry only (reg number migrated here) -->
+      <div class="manual-grid">
+        <div class="form-group full-width">
+          <label class="field-label">{{ t.bk_reg_number }}</label>
+          <div class="reg-input-wrap">
+            <div class="eu-flag-inline">
+              <span class="eu-stars">★</span>
+              <span>EU</span>
             </div>
-            <button class="find-btn" (click)="findVehicle()">
-              {{ t.bk_find_btn }}
-              <span class="material-symbols-outlined">arrow_forward</span>
-            </button>
+            <input
+              type="text"
+              [(ngModel)]="manualForm.regNumber"
+              [placeholder]="t.bk_plate_placeholder"
+              class="reg-input"
+            />
           </div>
           <p class="field-hint">
             <span class="material-symbols-outlined">info</span>
             {{ t.bk_plate_hint }}
           </p>
         </div>
-
-        <!-- Found Vehicle -->
-        <div *ngIf="vehicleFound() && vehicleInfo()" class="vehicle-found-card">
-          <div class="vehicle-icon">
-            <span class="material-symbols-outlined">directions_car</span>
-          </div>
-          <div class="vehicle-details">
-            <div class="vehicle-plate-badge">{{ vehicleInfo()!.plate }}</div>
-            <h3>{{ vehicleInfo()!.year }} {{ vehicleInfo()!.make }} {{ vehicleInfo()!.model }}</h3>
-            <p>{{ vehicleInfo()!.trim }}</p>
-          </div>
-          <button class="clear-btn" (click)="clearVehicle()">
-            <span class="material-symbols-outlined">close</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Manual Entry -->
-      <div *ngIf="vehicleTab() === 'manual'" class="manual-grid">
         <div class="form-group">
           <label class="field-label">{{ t.bk_make }}</label>
           <select [(ngModel)]="manualForm.make">
@@ -161,26 +124,46 @@
         <p>{{ t.bk_schedule_sub }}</p>
       </div>
 
-      <!-- Date picker -->
+      <!-- Date picker — real month calendar -->
       <div class="schedule-section">
-        <label class="field-label" style="margin-bottom: 0.75rem; display: block;">Date</label>
-        <div class="date-grid">
+        <label class="field-label" style="margin-bottom: 0.75rem; display: block;">{{ t.bk_date_label }}</label>
+
+        <!-- Month navigation header -->
+        <div class="cal-nav">
+          <button class="cal-nav-btn" (click)="prevMonth()" [disabled]="!canGoPrevMonth">
+            <span class="material-symbols-outlined">chevron_left</span>
+          </button>
+          <span class="cal-month-label">{{ calendarMonthLabel }}</span>
+          <button class="cal-nav-btn" (click)="nextMonth()">
+            <span class="material-symbols-outlined">chevron_right</span>
+          </button>
+        </div>
+
+        <!-- Weekday headers -->
+        <div class="cal-weekdays">
+          <span *ngFor="let h of weekDayHeaders">{{ h }}</span>
+        </div>
+
+        <!-- Day grid -->
+        <div class="cal-grid">
           <button
-            class="date-btn"
-            *ngFor="let day of calendarDays"
-            [class.selected]="selectedDate() === day.date"
-            [disabled]="day.disabled"
-            (click)="selectedDate.set(day.date)"
+            *ngFor="let cell of calendarGrid"
+            class="cal-day"
+            [class.empty]="cell.empty"
+            [class.selected]="selectedDate() === cell.date"
+            [class.past]="cell.past"
+            [class.sunday]="cell.disabled && !cell.past && !cell.empty"
+            [disabled]="cell.disabled"
+            (click)="!cell.empty && !cell.disabled && selectedDate.set(cell.date)"
           >
-            <span class="day-name">{{ day.dayName }}</span>
-            <span class="day-num">{{ day.dayNum }}</span>
+            <span *ngIf="!cell.empty">{{ cell.dayNum }}</span>
           </button>
         </div>
       </div>
 
       <!-- Time picker -->
       <div class="schedule-section" *ngIf="selectedDate()">
-        <label class="field-label" style="margin-bottom: 0.75rem; display: block;">Time</label>
+        <label class="field-label" style="margin-bottom: 0.75rem; display: block;">{{ t.bk_time_label }}</label>
         <div class="time-grid">
           <button
             class="time-btn"
@@ -227,8 +210,7 @@
             <span class="material-symbols-outlined">directions_car</span>
             {{ t.bk_vehicle_label }}
           </h4>
-          <p *ngIf="vehicleInfo()">{{ vehicleInfo()!.year }} {{ vehicleInfo()!.make }} {{ vehicleInfo()!.model }}</p>
-          <p *ngIf="!vehicleInfo()">{{ manualForm.year }} {{ manualForm.make }} {{ manualForm.model }}</p>
+          <p>{{ manualForm.regNumber ? manualForm.regNumber + " — " : "" }}{{ manualForm.year }} {{ manualForm.make }} {{ manualForm.model }}</p>
         </div>
         <div class="confirm-block">
           <h4 class="confirm-block-title">
@@ -300,8 +282,8 @@
           </div>
           <div>
             <span class="summary-label">{{ t.bk_vehicle_label }}</span>
-            <p *ngIf="vehicleInfo()">{{ vehicleInfo()!.year }} {{ vehicleInfo()!.make }} {{ vehicleInfo()!.model }}</p>
-            <p *ngIf="!vehicleInfo()" class="empty">{{ t.bk_vehicle_empty }}</p>
+            <p *ngIf="manualForm.make">{{ manualForm.year }} {{ manualForm.make }} {{ manualForm.model }}</p>
+            <p *ngIf="!manualForm.make" class="empty">{{ t.bk_vehicle_empty }}</p>
           </div>
         </div>
 
@@ -370,8 +352,7 @@
     <div class="confirmed-details">
       <div class="cd-item">
         <span class="material-symbols-outlined">directions_car</span>
-        <span *ngIf="vehicleInfo()">{{ vehicleInfo()!.year }} {{ vehicleInfo()!.make }} {{ vehicleInfo()!.model }}</span>
-        <span *ngIf="!vehicleInfo()">{{ manualForm.make }} {{ manualForm.model }}</span>
+        <span>{{ manualForm.year }} {{ manualForm.make }} {{ manualForm.model }}</span>
       </div>
       <div class="cd-item">
         <span class="material-symbols-outlined">calendar_month</span>

@@ -1,0 +1,36 @@
+<section class="page-hero">
+  <div class="container">
+    <div class="badge">
+      <span class="material-symbols-outlined" style="font-size:0.9rem">build_circle</span>
+      {{ t.sp_badge }}
+    </div>
+    <h1>{{ t.sp_h1 }}</h1>
+    <p>{{ t.sp_sub }}</p>
+  </div>
+</section>
+
+<div class="page-wrapper">
+  <div class="container">
+    <div class="services-list">
+      <div class="service-row card" *ngFor="let s of services; let i = index" [class.reverse]="i % 2 !== 0">
+        <!-- #5 image column is fixed width, not 1fr/1fr -->
+        <div class="sr-img">
+          <img [src]="s.img" [alt]="s.title" loading="lazy"/>
+        </div>
+        <div class="sr-content">
+          <div class="sr-icon">
+            <span class="material-symbols-outlined">{{ s.icon }}</span>
+          </div>
+          <h2>{{ s.title }}</h2>
+          <p>{{ s.desc }}</p>
+          <ul>
+            <li *ngFor="let f of s.features">
+              <span class="material-symbols-outlined">check_circle</span> {{ f }}
+            </li>
+          </ul>
+          <a routerLink="/contact" class="book-btn">{{ t.sp_book_service }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

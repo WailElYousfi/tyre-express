@@ -25,21 +25,7 @@ import { TranslationService } from '../../core/services/translation.service';
         <!-- Hero diagram + download -->
         <div class="diagram-section">
           <div class="diagram-card card">
-            <div class="tyre-visual">
-              <div class="tyre-ring">
-                <div class="tyre-bg"></div>
-                <!-- Badge markers -->
-                <div class="marker marker-a">A</div>
-                <div class="marker marker-b">B</div>
-                <div class="marker marker-c">C</div>
-                <div class="marker marker-d">D</div>
-                <div class="marker marker-e">E</div>
-                <div class="spec-label">
-                  <span class="spec-code">205 / 55 R16 91V</span>
-                  <span class="spec-sub">Master Specification</span>
-                </div>
-              </div>
-            </div>
+            <img src="assets/images/tyre-markings.png" alt="Tyre" loading="lazy" class="image-markings"/>
           </div>
           <div class="diagram-aside">
             <h2 class="section-title">{{ t.tm_breakdown_title }}</h2>
@@ -115,14 +101,6 @@ import { TranslationService } from '../../core/services/translation.service';
             </div>
           </div>
 
-          <!-- CTA card -->
-          <div class="cta-card">
-            <span class="material-symbols-outlined">shopping_cart</span>
-            <h4>{{ t.tm_shop_title }}</h4>
-            <p>{{ t.tm_shop_sub }}</p>
-            <a routerLink="/book" class="shop-btn">{{ t.tm_shop_btn }}</a>
-          </div>
-
         </div>
 
         <!-- Speed Rating Chart -->
@@ -150,7 +128,8 @@ import { TranslationService } from '../../core/services/translation.service';
       @media (max-width: 768px) { grid-template-columns: 1fr; }
     }
 
-    .diagram-card { padding: 2rem; display: flex; align-items: center; justify-content: center; }
+    .diagram-card { padding: 0rem; display: flex; align-items: center; justify-content: center; }
+    .image-markings { border-radius: 17px;}
 
     .tyre-visual { width: 100%; max-width: 360px; margin: 0 auto; aspect-ratio: 1; }
 
@@ -240,22 +219,6 @@ import { TranslationService } from '../../core/services/translation.service';
       &.warning { border-color: #f59e0b; background: rgba(245,158,11,0.06);
         .material-symbols-outlined { color: #f59e0b; }
       }
-    }
-
-    .cta-card {
-      background: var(--primary); border-radius: var(--radius-xl); padding: 1.75rem;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; color: #111;
-      .material-symbols-outlined { font-size: 2.5rem; margin-bottom: 0.75rem; }
-      h4 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; margin-bottom: 0.5rem; }
-      p { font-size: 0.82rem; opacity: 0.75; margin-bottom: 1.25rem; color: #111; }
-    }
-
-    .shop-btn {
-      display: block; width: 100%; padding: 0.75rem; background: #111; color: var(--primary);
-      font-weight: 800; font-size: 0.85rem; border-radius: var(--radius-lg); text-decoration: none;
-      text-align: center; transition: background 0.2s;
-      &:hover { background: #222; }
     }
 
     /* Speed Chart */

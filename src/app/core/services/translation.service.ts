@@ -219,6 +219,50 @@ export interface Translations {
   oh_open: string;
   oh_closed: string;
   oh_today: string;
+
+  // Home service cards (translatable)
+  home_svc_change_title: string;
+  home_svc_change_desc: string;
+  home_svc_balance_title: string;
+  home_svc_balance_desc: string;
+  home_svc_rim_title: string;
+  home_svc_rim_desc: string;
+  home_svc_swap_title: string;
+  home_svc_swap_desc: string;
+  // Booking service labels
+  bk_svc_change_title: string;
+  bk_svc_change_desc: string;
+  bk_svc_balance_title: string;
+  bk_svc_balance_desc: string;
+  bk_svc_rim_title: string;
+  bk_svc_rim_desc: string;
+  bk_svc_swap_title: string;
+  bk_svc_swap_desc: string;
+  // Weekday names
+  day_mon: string; day_tue: string; day_wed: string; day_thu: string;
+  day_fri: string; day_sat: string; day_sun: string;
+  day_monday: string; day_tuesday: string; day_wednesday: string;
+  day_thursday: string; day_friday: string; day_saturday: string; day_sunday: string;
+  // Registration
+  bk_reg_number: string;
+
+  // Services page — card content
+  sp_svc_change_title: string; sp_svc_change_desc: string;
+  sp_svc_change_f1: string; sp_svc_change_f2: string; sp_svc_change_f3: string; sp_svc_change_f4: string;
+  sp_svc_balance_title: string; sp_svc_balance_desc: string;
+  sp_svc_balance_f1: string; sp_svc_balance_f2: string; sp_svc_balance_f3: string; sp_svc_balance_f4: string;
+  sp_svc_rim_title: string; sp_svc_rim_desc: string;
+  sp_svc_rim_f1: string; sp_svc_rim_f2: string; sp_svc_rim_f3: string; sp_svc_rim_f4: string;
+  sp_svc_swap_title: string; sp_svc_swap_desc: string;
+  sp_svc_swap_f1: string; sp_svc_swap_f2: string; sp_svc_swap_f3: string; sp_svc_swap_f4: string;
+
+  // Header login button
+  header_login: string;
+
+  // Booking calendar labels
+  bk_date_label: string;
+  bk_time_label: string;
+
 }
 
 const EN: Translations = {
@@ -334,7 +378,7 @@ const EN: Translations = {
   bk_tab_plate: 'License Plate',
   bk_tab_manual: 'Manual Entry',
   bk_plate_label: 'Registration Number',
-  bk_plate_placeholder: 'AB12 CDE',
+  bk_plate_placeholder: '1-ABC-001',
   bk_find_btn: 'FIND',
   bk_plate_hint: "We'll automatically identify your vehicle's tyre specs.",
   bk_make: 'Make',
@@ -403,6 +447,41 @@ const EN: Translations = {
   oh_open: 'Open',
   oh_closed: 'Closed',
   oh_today: 'Today',
+
+  home_svc_change_title: 'Tire Change',
+  home_svc_change_desc: 'On-site replacement of summer, winter, or all-season tires for any vehicle.',
+  home_svc_balance_title: 'Balancing',
+  home_svc_balance_desc: 'State-of-the-art computer balancing to ensure a smooth, vibration-free ride.',
+  home_svc_rim_title: 'Rim Repair',
+  home_svc_rim_desc: 'Fixing curbside damage, scratches, and minor dents on your alloy wheels.',
+  home_svc_swap_title: 'Winter/Summer Swap',
+  home_svc_swap_desc: 'Seasonal changeovers and storage solutions for your off-season sets.',
+  bk_svc_change_title: 'Tire Change',
+  bk_svc_change_desc: 'On-site replacement of all tire types.',
+  bk_svc_balance_title: 'Wheel Balancing',
+  bk_svc_balance_desc: 'Computer balancing for a vibration-free ride.',
+  bk_svc_rim_title: 'Rim Repair',
+  bk_svc_rim_desc: 'Fix scratches and dents on alloy wheels.',
+  bk_svc_swap_title: 'Seasonal Swap',
+  bk_svc_swap_desc: 'Winter/summer changeover with storage.',
+  day_mon: 'Mon', day_tue: 'Tue', day_wed: 'Wed', day_thu: 'Thu',
+  day_fri: 'Fri', day_sat: 'Sat', day_sun: 'Sun',
+  day_monday: 'Monday', day_tuesday: 'Tuesday', day_wednesday: 'Wednesday',
+  day_thursday: 'Thursday', day_friday: 'Friday', day_saturday: 'Saturday', day_sunday: 'Sunday',
+  bk_reg_number: 'Registration Number',
+
+  sp_svc_change_title: 'Tire Change', sp_svc_change_desc: 'On-site replacement of summer, winter, or all-season tires for any vehicle. Our technicians handle everything from removal to fitting and torquing.',
+  sp_svc_change_f1: 'All vehicle types', sp_svc_change_f2: 'Same-day service', sp_svc_change_f3: 'OEM-spec torque settings', sp_svc_change_f4: 'TPMS sensor check',
+  sp_svc_balance_title: 'Wheel Balancing', sp_svc_balance_desc: 'State-of-the-art computer balancing to ensure a smooth, vibration-free ride. Eliminates uneven tire wear and extends the life of your tires.',
+  sp_svc_balance_f1: 'Digital computerized balancing', sp_svc_balance_f2: 'Eliminates vibration', sp_svc_balance_f3: 'Extends tire lifespan', sp_svc_balance_f4: 'Improves fuel efficiency',
+  sp_svc_rim_title: 'Rim Repair', sp_svc_rim_desc: 'Fixing curbside damage, scratches, and minor dents on your alloy wheels. Restore your rims to their original condition without expensive replacements.',
+  sp_svc_rim_f1: 'Alloy & steel rims', sp_svc_rim_f2: 'Scratch & dent repair', sp_svc_rim_f3: 'Cosmetic refinishing', sp_svc_rim_f4: 'Same session as tire service',
+  sp_svc_swap_title: 'Winter / Summer Swap', sp_svc_swap_desc: 'Seasonal changeovers and storage solutions for your off-season tire sets. Never worry about getting caught in the wrong tires.',
+  sp_svc_swap_f1: 'Storage included', sp_svc_swap_f2: 'Seasonal reminders', sp_svc_swap_f3: 'Full balancing included', sp_svc_swap_f4: 'Fleet packages available',
+  header_login: 'Login',
+  bk_date_label: 'Select a Date',
+  bk_time_label: 'Select a Time',
+
 };
 
 const NL: Translations = {
@@ -518,7 +597,7 @@ const NL: Translations = {
   bk_tab_plate: 'Kentekenplaat',
   bk_tab_manual: 'Handmatige invoer',
   bk_plate_label: 'Kentekennummer',
-  bk_plate_placeholder: 'AB12 CDE',
+  bk_plate_placeholder: '1-ABC-001',
   bk_find_btn: 'ZOEKEN',
   bk_plate_hint: 'Wij identificeren automatisch de bandenspecificaties van uw voertuig.',
   bk_make: 'Merk',
@@ -587,6 +666,41 @@ const NL: Translations = {
   oh_open: 'Open',
   oh_closed: 'Gesloten',
   oh_today: 'Vandaag',
+
+  home_svc_change_title: 'Bandenwisseling',
+  home_svc_change_desc: 'Ter plaatse vervangen van zomer-, winter- of all-season banden voor elk voertuig.',
+  home_svc_balance_title: 'Balancering',
+  home_svc_balance_desc: 'Computerbalancering voor een soepele, trillingsvrije rit.',
+  home_svc_rim_title: 'Velgreparatie',
+  home_svc_rim_desc: 'Herstel van rijschade, krassen en kleine deuken op uw velgen.',
+  home_svc_swap_title: 'Winter/Zomerwisseling',
+  home_svc_swap_desc: 'Seizoenswisselingen en opslagoplossingen voor uw banden.',
+  bk_svc_change_title: 'Bandenwisseling',
+  bk_svc_change_desc: 'Ter plaatse vervangen van alle bandentypen.',
+  bk_svc_balance_title: 'Wielbalancering',
+  bk_svc_balance_desc: 'Computerbalancering voor een trillingsvrije rit.',
+  bk_svc_rim_title: 'Velgreparatie',
+  bk_svc_rim_desc: 'Herstel krassen en deuken op velgen.',
+  bk_svc_swap_title: 'Seizoenswisseling',
+  bk_svc_swap_desc: 'Winter/zomer wisseling met opslag.',
+  day_mon: 'Ma', day_tue: 'Di', day_wed: 'Wo', day_thu: 'Do',
+  day_fri: 'Vr', day_sat: 'Za', day_sun: 'Zo',
+  day_monday: 'Maandag', day_tuesday: 'Dinsdag', day_wednesday: 'Woensdag',
+  day_thursday: 'Donderdag', day_friday: 'Vrijdag', day_saturday: 'Zaterdag', day_sunday: 'Zondag',
+  bk_reg_number: 'Kentekennummer',
+
+  sp_svc_change_title: 'Bandenwisseling', sp_svc_change_desc: 'Ter plaatse vervangen van zomer-, winter- of all-season banden voor elk voertuig. Onze technici regelen alles van verwijdering tot montage en aandraaien.',
+  sp_svc_change_f1: 'Alle voertuigtypes', sp_svc_change_f2: 'Same-day service', sp_svc_change_f3: 'OEM aandraaimoment', sp_svc_change_f4: 'TPMS sensorcheck',
+  sp_svc_balance_title: 'Wielbalancering', sp_svc_balance_desc: 'Computerbalancering voor een soepele, trillingsvrije rit. Vermindert ongelijkmatige bandenslijtage en verlengt de levensduur van uw banden.',
+  sp_svc_balance_f1: 'Digitale computerbalancering', sp_svc_balance_f2: 'Elimineert trillingen', sp_svc_balance_f3: 'Verlengt bandlevensduur', sp_svc_balance_f4: 'Verbetert brandstofverbruik',
+  sp_svc_rim_title: 'Velgreparatie', sp_svc_rim_desc: 'Herstel van rijschade, krassen en kleine deuken op uw velgen. Herstel uw velgen naar hun oorspronkelijke staat zonder dure vervangingen.',
+  sp_svc_rim_f1: 'Aluminium & stalen velgen', sp_svc_rim_f2: 'Kras- en deukrsherstel', sp_svc_rim_f3: 'Cosmetische afwerking', sp_svc_rim_f4: 'Gecombineerd met bandenservice',
+  sp_svc_swap_title: 'Winter / Zomerwisseling', sp_svc_swap_desc: 'Seizoenswisselingen en opslagoplossingen voor uw bandensetten. Nooit meer de verkeerde banden op het verkeerde moment.',
+  sp_svc_swap_f1: 'Opslag inbegrepen', sp_svc_swap_f2: 'Seizoensherinneringen', sp_svc_swap_f3: 'Balancering inbegrepen', sp_svc_swap_f4: 'Vlootpakketten beschikbaar',
+  header_login: 'Inloggen',
+  bk_date_label: 'Kies een datum',
+  bk_time_label: 'Kies een tijdstip',
+
 };
 
 @Injectable({ providedIn: 'root' })

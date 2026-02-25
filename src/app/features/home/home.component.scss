@@ -39,7 +39,7 @@
 
   p {
     font-size: 1.05rem;
-    color: #94a3b8;
+    color: var(--text-secondary);
     max-width: 500px;
     line-height: 1.75;
     margin-bottom: 2.5rem;
@@ -77,8 +77,8 @@
   gap: 0.75rem;
   padding: 0.75rem 1.25rem;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border-dark);
-  background: var(--surface-dark);
+  border: 1px solid var(--border);
+  background: var(--surface);
   font-size: 0.82rem;
   font-weight: 500;
 }
@@ -90,8 +90,8 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: #334155;
-    border: 2px solid var(--surface-dark);
+    background: var(--surface-alt);
+    border: 2px solid var(--surface);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,7 +111,7 @@
 .image-card {
   border-radius: var(--radius-xl);
   overflow: hidden;
-  border: 1px solid var(--border-dark);
+  border: 1px solid var(--border);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
   aspect-ratio: 4/3;
 
@@ -124,9 +124,9 @@
 
 /* === VALUE PROPS === */
 .value-props {
-  background: var(--surface-dark);
-  border-top: 1px solid var(--border-dark);
-  border-bottom: 1px solid var(--border-dark);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   padding: 3rem 0;
 }
 
@@ -255,9 +255,9 @@
     align-items: center;
     gap: 0.4rem;
     padding: 0.85rem 2rem;
-    border: 1px solid var(--border-dark);
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    color: #f1f5f9;
+    color: var(--text);
     font-weight: 700;
     font-size: 0.88rem;
     text-decoration: none;
@@ -270,7 +270,7 @@
 /* === HOW IT WORKS === */
 .how-section {
   padding: 6rem 0;
-  background: rgba(30, 30, 30, 0.4);
+  background: var(--surface-alt);
 
   .section-title { margin-bottom: 3rem; }
 }
@@ -343,7 +343,7 @@
 /* === TESTIMONIALS === */
 .testimonials-section {
   padding: 6rem 0;
-  background: var(--surface-dark);
+  background: var(--surface-alt);
 
   .section-title { margin-bottom: 3rem; }
 }
@@ -373,7 +373,7 @@
 
   p {
     font-style: italic;
-    color: #cbd5e1;
+    color: var(--text-secondary);
     font-size: 0.9rem;
     line-height: 1.7;
     margin-bottom: 1.25rem;
@@ -382,7 +382,7 @@
   .author {
     font-size: 0.82rem;
     font-weight: 700;
-    color: #f1f5f9;
+    color: var(--text);
   }
 }
 
@@ -431,9 +431,9 @@
     padding: 1rem 2rem;
     font-size: 1rem;
     font-weight: 700;
-    border: 1px solid var(--border-dark);
+    border: 1px solid var(--border);
     border-radius: var(--radius-xl);
-    color: #f1f5f9;
+    color: var(--text);
     text-decoration: none;
     transition: border-color 0.2s, background 0.2s;
 

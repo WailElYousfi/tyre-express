@@ -193,3 +193,24 @@ header {
   width: auto;
   display: block;
 }
+.btn-login {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+
+  .material-symbols-outlined { font-size: 1rem; }
+
+  &:hover {
+    border-color: var(--primary);
+    color: var(--text);
+  }
+}

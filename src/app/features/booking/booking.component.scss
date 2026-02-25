@@ -1,7 +1,7 @@
 /* ── STEPPER ─────────────────────────────────────────────────────────────── */
 .stepper-wrapper {
-  background: var(--surface-dark);
-  border-bottom: 1px solid var(--border-dark);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
   padding: 1.5rem 0;
   margin-bottom: 3rem;
 }
@@ -16,7 +16,7 @@
 .step-connector {
   flex: 1;
   height: 2px;
-  background: var(--border-dark);
+  background: var(--border);
   margin: 0 0.5rem;
   margin-bottom: 1.5rem;
   transition: background 0.3s;
@@ -38,7 +38,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 2px solid var(--border-dark);
+    border: 2px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,7 +46,7 @@
     font-size: 0.9rem;
     color: #475569;
     transition: all 0.3s;
-    background: var(--bg-dark);
+    background: var(--bg);
 
     .material-symbols-outlined { font-size: 1rem; }
   }
@@ -102,8 +102,8 @@
 }
 
 .step-panel {
-  background: var(--surface-dark);
-  border: 1px solid var(--border-dark);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: 2rem 2.5rem;
 
@@ -129,7 +129,7 @@
 /* ── TAB TOGGLE ──────────────────────────────────────────────────────────── */
 .tab-toggle {
   display: flex;
-  background: var(--bg-dark);
+  background: var(--bg);
   border-radius: var(--radius-lg);
   padding: 4px;
   max-width: 320px;
@@ -148,10 +148,10 @@
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 
     &.active {
-      background: var(--surface-dark);
+      background: var(--surface);
       color: #f1f5f9;
       box-shadow: 0 1px 6px rgba(0,0,0,0.3);
-      border: 1px solid var(--border-dark);
+      border: 1px solid var(--border);
     }
   }
 }
@@ -207,8 +207,8 @@
   font-weight: 900;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  background: var(--bg-dark);
-  border: 2px solid var(--border-dark);
+  background: var(--bg);
+  border: 2px solid var(--border);
   border-radius: var(--radius-lg);
   color: #f1f5f9;
   transition: border-color 0.2s;
@@ -305,7 +305,7 @@
   height: 32px;
   border-radius: 50%;
   background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border-dark);
+  border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -333,8 +333,8 @@
   gap: 0.4rem;
 
   input, select, textarea {
-    background: var(--bg-dark);
-    border: 1px solid var(--border-dark);
+    background: var(--bg);
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 0.7rem 0.9rem;
     color: #f1f5f9;
@@ -360,7 +360,7 @@
   align-items: center;
   gap: 1rem;
   padding: 1.1rem 1.25rem;
-  border: 1.5px solid var(--border-dark);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius-xl);
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
@@ -416,7 +416,7 @@
   padding-bottom: 0.5rem;
 
   &::-webkit-scrollbar { height: 3px; }
-  &::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 3px; }
+  &::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 }
 
 .date-btn {
@@ -425,8 +425,8 @@
   align-items: center;
   gap: 0.3rem;
   padding: 0.6rem 0.9rem;
-  background: var(--bg-dark);
-  border: 1.5px solid var(--border-dark);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: all 0.2s;
@@ -451,8 +451,8 @@
 
 .time-btn {
   padding: 0.55rem 0.4rem;
-  background: var(--bg-dark);
-  border: 1.5px solid var(--border-dark);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius-lg);
   font-size: 0.8rem;
   font-weight: 700;
@@ -480,8 +480,8 @@
   }
 
   input {
-    background: var(--bg-dark);
-    border: 1px solid var(--border-dark);
+    background: var(--bg);
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 0.75rem 0.9rem 0.75rem 2.5rem;
     color: #f1f5f9;
@@ -506,8 +506,8 @@
 
 .confirm-block {
   padding: 1.25rem;
-  background: var(--bg-dark);
-  border: 1px solid var(--border-dark);
+  background: var(--bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
 
   h4 {
@@ -616,8 +616,8 @@
 }
 
 .summary-card {
-  background: var(--surface-dark);
-  border: 1px solid var(--border-dark);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   overflow: hidden;
 }
@@ -627,8 +627,8 @@
   align-items: center;
   gap: 0.6rem;
   padding: 1rem 1.25rem;
-  background: var(--bg-dark);
-  border-bottom: 1px solid var(--border-dark);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
   font-size: 0.82rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -662,7 +662,7 @@
   .sv-icon {
     width: 52px;
     height: 40px;
-    background: var(--bg-dark);
+    background: var(--bg);
     border-radius: var(--radius);
     display: flex;
     align-items: center;
@@ -681,7 +681,7 @@
     justify-content: space-between;
     font-size: 0.82rem;
     padding: 0.4rem 0;
-    border-bottom: 1px dashed var(--border-dark);
+    border-bottom: 1px dashed var(--border);
     color: #94a3b8;
     font-weight: 600;
 
@@ -694,7 +694,7 @@
 }
 
 .summary-pricing {
-  border-top: 1px solid var(--border-dark);
+  border-top: 1px solid var(--border);
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
@@ -711,7 +711,7 @@
 
   &.total {
     padding-top: 0.75rem;
-    border-top: 1px solid var(--border-dark);
+    border-top: 1px solid var(--border);
     font-size: 0.75rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -766,8 +766,8 @@
 }
 
 .confirmed-card {
-  background: var(--surface-dark);
-  border: 1px solid var(--border-dark);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: 3.5rem;
   text-align: center;
@@ -793,7 +793,7 @@
   flex-direction: column;
   gap: 0.5rem;
   padding: 1.25rem;
-  background: var(--bg-dark);
+  background: var(--bg);
   border-radius: var(--radius-lg);
   text-align: left;
   margin-bottom: 2rem;
@@ -830,7 +830,7 @@
 /* ── PARTNERS ────────────────────────────────────────────────────────────── */
 .partners-section {
   padding: 4rem 0 5rem;
-  border-top: 1px solid var(--border-dark);
+  border-top: 1px solid var(--border);
 
   h3 {
     font-size: 0.8rem;
@@ -859,4 +859,161 @@
   height: 36px;
   background: #334155;
   border-radius: 4px;
+}
+
+/* ── Registration number field (step 1) ── */
+.full-width {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* center the whole field */
+  margin-bottom: 2rem;
+}
+
+.reg-input-wrap {
+  display: flex;
+  align-items: stretch;
+  background: var(--bg);
+  border: 4px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.2s;
+  width: 100%;
+  max-width: 370px;
+  &:focus-within { border-color: var(--primary); }
+}
+
+.eu-flag-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  background: #003399;
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 0.5rem 0;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  gap: 3px;
+  .eu-stars { font-size: 0.8rem; letter-spacing: -1px; color: #ffcc00; }
+  span:last-child { font-size: 0.65rem; }
+}
+
+.reg-input {
+  flex: 1;
+  padding: 1.4rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: var(--font);
+  &:focus { outline: none; }
+  &::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.5;
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+
+/* ── Real month calendar (step 3) ── */
+.cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.cal-month-label {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.cal-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+
+  .material-symbols-outlined { font-size: 1.1rem; }
+
+  &:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
+  &:disabled { opacity: 0.3; cursor: default; }
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 4px;
+
+  span {
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    padding: 0.3rem 0;
+  }
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+
+  &.empty { visibility: hidden; pointer-events: none; }
+
+  &.past { color: var(--text-secondary); opacity: 0.35; cursor: default; }
+
+  &.sunday { color: var(--text-secondary); opacity: 0.35; cursor: default; }
+
+  &:not(.empty):not(.past):not(.sunday):hover {
+    background: rgba(245,200,0,0.1);
+    border-color: rgba(245,200,0,0.3);
+    color: var(--primary);
+  }
+
+  &.selected {
+    background: var(--primary) !important;
+    color: #111 !important;
+    font-weight: 800;
+    border-color: var(--primary) !important;
+  }
+
+  &:disabled { cursor: default; }
 }

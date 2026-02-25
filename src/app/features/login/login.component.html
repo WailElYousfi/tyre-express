@@ -1,0 +1,63 @@
+<div class="login-page">
+  <div class="login-box card">
+
+    <!-- Logo -->
+    <div class="login-logo">
+      <img src="assets/images/tyre-express-logo.svg"  alt="Tyre-Express" />
+    </div>
+
+    <!-- Heading -->
+    <div class="login-heading">
+      <h1>{{ t.login_title }}</h1>
+      <p>{{ t.login_sub }}</p>
+    </div>
+
+    <!-- Error alert -->
+    <div class="error-alert" *ngIf="error()">
+      <span class="material-symbols-outlined">error</span>
+      <span>Invalid email or password. Please try again.</span>
+    </div>
+
+    <!-- Email -->
+    <div class="field">
+      <label>{{ t.login_email }}</label>
+      <div class="input-wrap">
+        <span class="material-symbols-outlined i-icon">mail</span>
+        <input type="email" [(ngModel)]="email" placeholder="you@example.com" [class.err]="error()"/>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="field">
+      <div class="label-row">
+        <label>{{ t.login_password }}</label>
+        <a href="#" class="forgot">{{ t.login_forgot }}</a>
+      </div>
+      <div class="input-wrap">
+        <span class="material-symbols-outlined i-icon">lock</span>
+        <input [type]="showPassword() ? 'text' : 'password'" [(ngModel)]="password"
+          placeholder="••••••••" [class.err]="error()"/>
+        <button class="eye-btn" (click)="togglePassword()" type="button">
+          <span class="material-symbols-outlined">{{ showPassword() ? 'visibility_off' : 'visibility' }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Remember me -->
+    <label class="remember">
+      <input type="checkbox" [(ngModel)]="rememberMe"/>
+      <span>{{ t.login_remember }}</span>
+    </label>
+
+    <!-- Submit -->
+    <button class="submit-btn" (click)="submit()" [class.loading]="loading()">
+      <span class="material-symbols-outlined" *ngIf="!loading()">login</span>
+      <span class="spinner" *ngIf="loading()"></span>
+      <span>{{ loading() ? 'Signing in…' : t.login_btn }}</span>
+    </button>
+
+    <!-- Footer -->
+    <p class="footer-note">{{ t.login_no_account }}</p>
+
+  </div>
+</div>

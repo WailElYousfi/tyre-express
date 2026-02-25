@@ -32,8 +32,8 @@ export class HeaderComponent {
     return [
       { label: t.nav_services,    path: '/services' },
       { label: t.nav_how_it_works, path: '/how-it-works' },
-      { label: t.nav_service_area, path: '/service-area' },
-      { label: t.nav_about,       path: '/about' },
+     // { label: t.nav_service_area, path: '/service-area' },
+     // { label: t.nav_about,       path: '/about' },
       { label: t.nav_tyre_guide,  path: '/tyre-markings' },
       { label: t.nav_contact,     path: '/contact' },
     ];

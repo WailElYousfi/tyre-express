@@ -36,6 +36,10 @@
         {{ t().nav_call }}
       </a>
 
+      <a routerLink="/login" class="btn-login">
+        <span class="material-symbols-outlined">person</span>
+        {{ t().header_login }}
+      </a>
       <a routerLink="/book" class="btn-primary">{{ t().header_book }}</a>
     </div>
 
@@ -70,6 +74,10 @@
       <a href="tel:+3200000000" class="btn-outline" (click)="closeMobileMenu()">
         <span class="material-symbols-outlined">call</span>
         {{ t().nav_call }}
+      </a>
+      <a routerLink="/login" class="btn-outline" (click)="closeMobileMenu()">
+        <span class="material-symbols-outlined">person</span>
+        {{ t().header_login }}
       </a>
       <a routerLink="/book" class="btn-primary" (click)="closeMobileMenu()">{{ t().header_book }}</a>
     </div>

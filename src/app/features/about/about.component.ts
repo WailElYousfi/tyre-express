@@ -36,10 +36,7 @@ import { TranslationService } from '../../core/services/translation.service';
             </div>
           </div>
           <div class="story-visual">
-            <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcZ3bfzFeRJ63e6nECZ-beybW_q6iKsFPx3SdXGEpkDVaMoSUGbtcz2bw15t7Q5H8Qpdok1zsbykwRtea8EkLSGR8IYczpwHMDHpHIxjE0rAooKVf0vF-wk-BtDSwzKQgOeGr2Z29zUc_Pm4ZCDOhclbtivBHna63nmUrh6_qs9x3MjT7lqQgM0yYi-aaHxUs1vDR4C27ZbmxRFbC4yfX4sW4Gth7vvCgvvn2tkW-Fv3Yc7RKTlxBKt4TBfkqACowguDC6z4Ppr_D6"
-              alt="Tyre-Express van"
-            />
+            <img src="assets/images/company-image.jpg" loading="lazy"/>
           </div>
         </div>
 
@@ -79,7 +76,7 @@ import { TranslationService } from '../../core/services/translation.service';
       span:last-child { color: var(--text-muted); }
     }
     .story-visual {
-      border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border-dark);
+      border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);
       box-shadow: 0 20px 50px rgba(0,0,0,0.4);
       img { width: 100%; height: 360px; object-fit: cover; }
     }
