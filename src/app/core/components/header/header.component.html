@@ -2,8 +2,7 @@
   <div class="container header-inner">
 
     <a class="logo" routerLink="/" (click)="closeMobileMenu()">
-      <span class="material-symbols-outlined logo-icon">tire_repair</span>
-      <span class="logo-text">Tyre-Express</span>
+      <img src="assets/images/tyre-express-logo.svg"  alt="Tyre-Express" class="logo-img" />
     </a>
 
     <nav class="desktop-nav">
@@ -27,8 +26,8 @@
           <span class="material-symbols-outlined lang-chevron" [class.rotated]="langDropdownOpen()">expand_more</span>
         </button>
         <div class="lang-dropdown" *ngIf="langDropdownOpen()">
-          <button (click)="setLang('en')" [class.active]="lang() === 'en'">English</button>
-          <button (click)="setLang('nl')" [class.active]="lang() === 'nl'">Nederlands</button>
+          <button (click)="setLang('en')" [class.active]="lang() === 'en'">🇬🇧 &nbsp;English</button>
+          <button (click)="setLang('nl')" [class.active]="lang() === 'nl'">🇳🇱 &nbsp;Nederlands</button>
         </div>
       </div>
 

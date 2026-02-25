@@ -23,7 +23,7 @@ export class HeaderComponent {
 
   // Derived signals — only recompute when the language signal changes
   readonly lang = computed(() => this.ts.langSignal());
-  readonly currentLang = computed(() => this.lang() === 'en' ? 'EN' : 'NL');
+  readonly currentLang = computed(() => this.lang() === 'en' ? '🇬🇧 EN' : '🇳🇱 NL');
   readonly isDark = computed(() => this.themeService.themeSignal() === 'dark');
 
   // Computed array: rebuilt only when lang changes, not on every CD cycle

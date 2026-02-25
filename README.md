@@ -73,7 +73,7 @@ npm run build
 All design tokens are in `src/styles.scss` as CSS variables:
 
 ```scss
---primary: #ff6a00          // Brand orange
+--primary: #f5c800          // Brand yellow
 --bg-dark: #121212          // Page background
 --surface-dark: #1e1e1e     // Card background
 --border-dark: #2d2d2d      // Borders
